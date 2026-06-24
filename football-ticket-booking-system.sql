@@ -156,3 +156,15 @@ FROM
 WHERE
   full_name ILIKE 'tanvir%'
   OR full_name ILIKE '%haque%';
+
+  --Query 3: Retrieve all booking records where the payment status is missing (NULL), replacing the empty result with 'Action Required'.
+SELECT
+  booking_id,
+  user_id,
+  match_id,
+  seat_number,
+  coalesce(payment_status, 'Action Required') AS payment_status
+FROM
+  bookings
+WHERE
+  payment_status IS NULL
